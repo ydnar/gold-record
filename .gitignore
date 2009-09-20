@@ -1,0 +1,6 @@
+.DS_Store
+*.log
+log/*
+*.pid
+*.tmproj
+*.sqlite3

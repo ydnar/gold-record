@@ -1,0 +1,48 @@
+= GoldRecord
+
+* http://github.com/ydnar/gold-record
+* http://en.wikipedia.org/wiki/Universally_Unique_Identifier
+* mailto:randy@ydnar.com
+
+== DESCRIPTION
+
+GoldRecord is an extension for ActiveRecord that implements unobtrusive binary UUIDs in MySQL.
+
+== FEATURES
+
+* Uses space-efficient 16-byte binary representation for UUIDs.
+* Works with associations, migrations and ActiveRecord::SchemaDumper.
+* Transparently converts to/from hex-encoded UUIDs in #to_param and #find.
+
+GoldRecord supports SchemaDumper by not declaring the <tt>id</tt> column a <tt>PRIMARY KEY</tt>. The odds of a random UUID collision are documented here[http://en.wikipedia.org/wiki/Universally_Unique_Identifier#Random_UUID_probability_of_duplicates].
+
+== SYNOPSIS
+
+  class Blog < ActiveRecord::Base
+    acts_as_gold_record
+    has_many :posts
+  end
+  
+  class Post < ActiveRecord::Base
+    acts_as_gold_record
+  end
+
+=== Or:
+
+  class Widget < GoldRecord::Base
+  end
+  
+=== Or:
+  
+  class LargeHadron < ActiveRecord::Base
+    acts_as_gold_record
+    validates_uniqueness_of :id, :on => :create
+  end
+
+== INSTALL
+
+  [sudo] gem install gold-record
+
+== KANYE
+
+<em>“And I’m gonna let you finish, but this is best way to represent IDs.”</em>

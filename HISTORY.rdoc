@@ -1,0 +1,7 @@
+=== Version 0.1.0
+
+This is the first preview release of GoldRecord, an extension for ActiveRecord that implements unobtrusive support for binary UUIDs.
+
+* Currently requires MySQL.
+* Basic gem + project framework.
+* Extracted and renamed from UniversalRecord to GoldRecord.

@@ -42,7 +42,3 @@ GoldRecord supports SchemaDumper by not declaring the <tt>id</tt> column a <tt>P
 == INSTALL
 
   [sudo] gem install gold-record
-
-== KANYE
-
-<em>“And I’m gonna let you finish, but this is best way to represent IDs.”</em>

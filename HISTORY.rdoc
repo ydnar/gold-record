@@ -1,4 +1,4 @@
-=== Version 0.1.0
+=== Version 0.1.0 (git)
 
 This is the first preview release of GoldRecord, an extension for ActiveRecord that implements unobtrusive support for binary UUIDs.
 

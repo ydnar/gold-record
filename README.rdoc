@@ -41,4 +41,10 @@ GoldRecord supports SchemaDumper by not declaring the <tt>id</tt> column a <tt>P
 
 == INSTALL
 
+=== As a gem:
+
   [sudo] gem install gold-record
+
+=== As a Rails plugin:
+
+Clone/copy to vendor/plugins/gold_record.

@@ -1,10 +1,13 @@
-# Replace Fixtures.identify for binary UUIDs.
 module GoldRecord
   module Fixtures
     def self.included(base)
       base.class_eval do
-        def self.identify(label)
-          UUIDTools::UUID.sha1_create(UUIDTools::UUID_DNS_NAMESPACE, label.to_s).raw
+        class << self
+          # Patch Fixtures.identify for binary UUIDs.
+          def identify_with_padding(label)
+            "%-16d" % identify_without_padding(label)
+          end
+          alias_method_chain :identify, :padding
         end
       end
     end

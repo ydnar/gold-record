@@ -2,6 +2,10 @@ require 'uuidtools'
 
 module GoldRecord
   module ClassMethods
+    def gold_record?
+      true
+    end
+    
     def coerce_id(id)
       if id.is_a?(String) && id.size == 16
         id

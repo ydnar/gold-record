@@ -52,9 +52,3 @@ module GoldRecord
 end
 
 ActiveRecord::Base.extend GoldRecord::ActMethods
-
-module GoldRecord
-  class Base < ActiveRecord::Base
-    acts_as_gold_record
-  end
-end

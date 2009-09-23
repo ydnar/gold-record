@@ -26,11 +26,6 @@ GoldRecord supports SchemaDumper by not declaring the <tt>id</tt> column a <tt>P
   class Post < ActiveRecord::Base
     acts_as_gold_record
   end
-
-=== Or:
-
-  class Widget < GoldRecord::Base
-  end
   
 === Or:
   

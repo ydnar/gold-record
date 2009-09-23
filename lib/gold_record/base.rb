@@ -14,13 +14,13 @@ module GoldRecord
       end
     end
 
-    def find_one_with_coerce(id, options)
-      find_one_without_coerce(coerce_id(id), options)
+    def find_one_with_uuid(id, options)
+      find_one_without_uuid(coerce_id(id), options)
     end
 
-    def find_some_with_coerce(ids, options)
+    def find_some_with_uuid(ids, options)
       ids = ids.map { |id| coerce_id(id) }
-      find_some_without_coerce(ids, options)
+      find_some_without_uuid(ids, options)
     end
   end
 
@@ -29,7 +29,7 @@ module GoldRecord
       UUIDTools::UUID.parse_raw(id.to_s)
     end
 
-    def to_param
+    def to_param_with_uuid
       to_uuid.to_param
     end
 
@@ -41,12 +41,13 @@ module GoldRecord
   module ActMethods
     def acts_as_gold_record
       extend ClassMethods
-      include InstanceMethods
-      before_create :generate_id!
       class << self
-        alias_method_chain :find_one, :coerce
-        alias_method_chain :find_some, :coerce
+        alias_method_chain :find_one, :uuid
+        alias_method_chain :find_some, :uuid
       end
+      include InstanceMethods
+      alias_method_chain :to_param, :uuid
+      before_create :generate_id!
     end
   end
 end

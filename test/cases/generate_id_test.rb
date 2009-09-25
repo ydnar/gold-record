@@ -12,4 +12,14 @@ class GenerateIdTest < ActiveRecord::TestCase
     assert artist.id.instance_of?(String)
     assert_equal artist.id.size, 16
   end
+
+  def test_generate_id_for_existing_record
+    artist = Artist.first
+    assert !artist.new_record?
+    assert artist.id.instance_of?(String)
+    assert_equal artist.id.size, 16
+    id = artist.id
+    artist.generate_id!
+    assert_equal artist.id, id
+  end
 end

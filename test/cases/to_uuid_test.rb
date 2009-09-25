@@ -20,6 +20,6 @@ class ToUuidTest < ActiveRecord::TestCase
   def test_to_uuid_returns_the_correct_uuid
     artist = Artist.first
     uuid = artist.to_uuid
-    assert_equal uuid.raw, artist.id
+    assert_equal artist.id, uuid.raw
   end
 end

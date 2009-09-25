@@ -11,10 +11,10 @@ class CoerceIdTest < ActiveRecord::TestCase
   end
 
   def test_coerce_id_with_binary_uuid
-    assert_equal Artist.coerce_id(NULL_UUID_RAW), NULL_UUID_RAW
+    assert_equal NULL_UUID_RAW, Artist.coerce_id(NULL_UUID_RAW)
   end
 
   def test_coerce_id_with_hex_uuid
-    assert_equal Artist.coerce_id(NULL_UUID.to_s), NULL_UUID_RAW
+    assert_equal NULL_UUID_RAW, Artist.coerce_id(NULL_UUID.to_s)
   end
 end

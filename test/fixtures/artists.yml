@@ -2,9 +2,21 @@ beatles:
   name: The Beatles
   label: emi
 
+ll_cool_j:
+  name: LL Cool J
+  label: def_jam
+
+method_man:
+  name: Method Man
+  label: def_jam
+
 michael_jackson:
   name: Michael Jackson
   label: sony
+
+snoop_dog:
+  name: Snoop Dog
+  label: def_jam
 
 warren_g:
   name: Warren G

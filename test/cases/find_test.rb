@@ -17,10 +17,10 @@ class FindTest < ActiveRecord::TestCase
   def test_find_with_multiple_binary_uuids
     artists = Artist.find([
       identify(:beatles),
-      identify(:michael_jackson),
-      identify(:warren_g),
+      identify(:ll_cool_j),
+      identify(:method_man),
     ])
-    assert_equal artists.size, 3
+    assert_equal 3, artists.size
     artists.each do |artist|
       assert artist.instance_of?(Artist)
     end
@@ -28,11 +28,11 @@ class FindTest < ActiveRecord::TestCase
 
   def test_find_with_multiple_hex_uuids
     artists = Artist.find([
+      identify_hex(:method_man),
       identify_hex(:beatles),
-      identify_hex(:michael_jackson),
       identify_hex(:warren_g),
     ])
-    assert_equal artists.size, 3
+    assert_equal 3, artists.size
     artists.each do |artist|
       assert artist.instance_of?(Artist)
     end
@@ -44,7 +44,7 @@ class FindTest < ActiveRecord::TestCase
       identify(:michael_jackson),
       identify_hex(:warren_g),
     ])
-    assert_equal artists.size, 3
+    assert_equal 3, artists.size
     artists.each do |artist|
       assert artist.instance_of?(Artist)
     end
@@ -53,13 +53,13 @@ class FindTest < ActiveRecord::TestCase
   def test_find_with_duplicate_mixed_uuids
     artists = Artist.find([
       identify(:beatles),
-      identify(:michael_jackson),
+      identify(:method_man),
       identify(:warren_g),
       identify_hex(:beatles),
-      identify_hex(:michael_jackson),
+      identify_hex(:method_man),
       identify_hex(:warren_g),
     ])
-    assert_equal artists.size, 3
+    assert_equal 3, artists.size
     artists.each do |artist|
       assert artist.instance_of?(Artist)
     end

@@ -1,11 +1,19 @@
 abbey_road:
   artist: beatles
-  name: The White Album
+  name: Abbey Road
 
 g_funk:
   artist: warren_g
   name: G-Funk
 
+sgt_pepper:
+  artist: beatles
+  name: Sargeant Pepper’s Lonely Hearts Club Band
+
 thriller:
   artist: michael_jackson
   name: Thriller
+
+white_album:
+  artist: beatles
+  name: The White Album

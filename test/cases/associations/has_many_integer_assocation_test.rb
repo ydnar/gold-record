@@ -5,7 +5,7 @@ class HasManyIntegerAssociationTest < ActiveRecord::TestCase
   fixtures :labels
   fixtures :artists
 
-  def test_has_many_artists
+  def test_has_many_with_integer_foreign_key
     label = labels(:def_jam)
     artists = label.artists
     assert_equal 4, artists.size

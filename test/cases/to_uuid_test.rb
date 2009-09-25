@@ -4,11 +4,6 @@ require 'models/artist'
 class ToUuidTest < ActiveRecord::TestCase
   fixtures :artists
 
-  def test_to_uuid_exists
-    artist = Artist.first
-    assert artist.respond_to?(:to_uuid)
-  end
-
   def test_to_uuid_returns_nil_for_new_record
     artist = Artist.new
     assert artist.new_record?

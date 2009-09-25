@@ -31,7 +31,8 @@ module GoldRecord
     end
 
     def to_param_with_uuid
-      to_uuid.to_param
+      uuid = to_uuid
+      uuid ? uuid.to_param : nil
     end
 
     def generate_id!

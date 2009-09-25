@@ -2,10 +2,6 @@ require 'cases/helper'
 require 'models/artist'
 
 class CoerceIdTest < ActiveRecord::TestCase
-  def test_coerce_id_exists
-    assert Artist.respond_to?(:coerce_id)
-  end
-
   def test_coerce_id_with_nil
     assert_nil Artist.coerce_id(nil)
   end

@@ -1,0 +1,11 @@
+beatles:
+  name: The Beatles
+  label: emi
+
+michael_jackson:
+  name: Michael Jackson
+  label: sony
+
+warren_g:
+  name: Warren G
+  label: def_jam

@@ -20,6 +20,7 @@ module GoldRecord
 
     def find_some_with_uuid(ids, options)
       ids = ids.map { |id| coerce_id(id) }
+      ids = ids.uniq # must do this after coercion
       find_some_without_uuid(ids, options)
     end
   end

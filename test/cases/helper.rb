@@ -13,6 +13,10 @@ require 'active_record/fixtures'
 require 'connection'
 
 require 'gold_record'
+require 'uuidtools'
+
+NULL_UUID_RAW = ("\000" * 16).freeze
+NULL_UUID = UUIDTools::UUID.parse_raw(NULL_UUID_RAW)
 
 # Show backtraces for deprecated behavior for quicker cleanup.
 ActiveSupport::Deprecation.debug = true

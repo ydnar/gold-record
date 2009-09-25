@@ -36,4 +36,15 @@ ActiveRecord::Schema.define do
     t.binary :artist_id, :limit => 16
     t.binary :fan_id, :limit => 16
   end
+  
+  # Foo
+  create_table :foos, :force => true, :id => false do |t|
+    t.binary :id, :limit => 16
+    t.string :name
+  end
+  
+  # Bar (not a GoldRecord)
+  create_table :bars, :force => true do |t|
+    t.string :name
+  end
 end

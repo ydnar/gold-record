@@ -27,7 +27,7 @@ module GoldRecord
 
   module InstanceMethods
     def to_uuid
-      UUIDTools::UUID.parse_raw(id.to_s)
+      UUIDTools::UUID.parse_raw(id) rescue nil
     end
 
     def to_param_with_uuid

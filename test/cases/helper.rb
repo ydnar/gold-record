@@ -12,11 +12,17 @@ require 'active_record/test_case'
 require 'active_record/fixtures'
 require 'connection'
 
-require 'gold_record'
 require 'uuidtools'
 
+require 'gold_record'
+
+# Patch Fixtures
+Fixtures.send :include, GoldRecord::Fixtures
+
+# UUID composed of all null bytes
 NULL_UUID_RAW = ("\000" * 16).freeze
 NULL_UUID = UUIDTools::UUID.parse_raw(NULL_UUID_RAW)
+NULL_UUID_HEX = NULL_UUID.to_s
 
 # Show backtraces for deprecated behavior for quicker cleanup.
 ActiveSupport::Deprecation.debug = true
@@ -67,5 +73,13 @@ class ActiveSupport::TestCase
 
   def create_fixtures(*table_names, &block)
     Fixtures.create_fixtures(ActiveSupport::TestCase.fixture_path, table_names, {}, &block)
+  end
+  
+  def identify(label)
+    Fixtures.identify(label)
+  end
+  
+  def identify_hex(label)
+    UUIDTools::UUID.parse_raw(identify(label)).to_s
   end
 end

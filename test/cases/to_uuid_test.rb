@@ -14,4 +14,10 @@ class ToUuidTest < ActiveRecord::TestCase
     uuid = artist.to_uuid
     assert uuid.instance_of?(UUIDTools::UUID)
   end
+
+  def test_to_uuid_returns_the_correct_uuid
+    artist = Artist.first
+    uuid = artist.to_uuid
+    assert_equal uuid.raw, artist.id
+  end
 end

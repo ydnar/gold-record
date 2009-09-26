@@ -5,7 +5,7 @@ class BelongsToIntegerAssociationTest < ActiveRecord::TestCase
   fixtures :labels
   fixtures :artists
 
-  def test_belongs_to_with_integer_foreign_key
+  def test_association_find
     artist = artists(:beatles)
     label = labels(:emi)
     assert_equal label, artist.label

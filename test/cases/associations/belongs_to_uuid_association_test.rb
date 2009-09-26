@@ -5,7 +5,7 @@ class BelongsToUuidAssociationTest < ActiveRecord::TestCase
   fixtures :artists
   fixtures :albums
 
-  def test_belongs_to_with_uuid_foreign_key
+  def test_association_find
     album = albums(:white_album)
     artist = artists(:beatles)
     assert_equal artist, album.artist

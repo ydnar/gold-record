@@ -1,0 +1,10 @@
+amoeba:
+  name: Amoeba Music
+  labels: def_jam, emi, sony, virgin
+
+tower:
+  name: Tower Records
+
+virgin:
+  name: Virgin Megastores
+  labels: def_jam, emi, sony, virgin

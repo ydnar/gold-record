@@ -14,4 +14,10 @@ class HabtmUuidToUuidAssociationTest < ActiveRecord::TestCase
       assert fans.instance_of?(Fan)
     end
   end
+  
+  def test_empty_assocation_find
+    artist = artists(:ll_cool_j)
+    fans = artist.fans
+    assert_equal 0, fans.size
+  end
 end

@@ -1,6 +1,7 @@
 amoeba:
   name: Amoeba Music
   labels: def_jam, emi, sony, virgin
+  artists: beatles, ll_cool_j, method_man, michael_jackson, snoop_dog, warren_g
 
 tower:
   name: Tower Records
@@ -8,3 +9,4 @@ tower:
 virgin:
   name: Virgin Megastores
   labels: def_jam, emi, sony, virgin
+  artists: beatles

@@ -4,4 +4,5 @@ class Artist < ActiveRecord::Base
   has_many :albums
   has_many :songs, :through => :albums
   has_and_belongs_to_many :fans
+  has_and_belongs_to_many :record_stores
 end

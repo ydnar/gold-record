@@ -47,4 +47,10 @@ ActiveRecord::Schema.define do
     t.integer :label_id
     t.integer :record_store_id
   end
+
+  # HABTM (with and integer and UUID)
+  create_table :artists_record_stores, :force => true, :id => false do |t|
+    t.binary :artist_id, :limit => 16
+    t.integer :record_store_id
+  end
 end

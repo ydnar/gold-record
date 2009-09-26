@@ -1,5 +1,5 @@
 ActiveRecord::Schema.define do
-  # Label (not a GoldRecord)
+  # Label (with integer ID)
   create_table :labels, :force => true do |t|
     t.string :name
   end
@@ -31,7 +31,7 @@ ActiveRecord::Schema.define do
     t.string :name
   end
 
-  # HABTM
+  # HABTM (with two UUIDs)
   create_table :artists_fans, :force => true, :id => false do |t|
     t.binary :artist_id, :limit => 16
     t.binary :fan_id, :limit => 16

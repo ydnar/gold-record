@@ -1,6 +1,7 @@
 beatles:
   name: The Beatles
   label: emi
+  fans: cameron, jack, jim, paul, randy, robert, sam, tristan
 
 ll_cool_j:
   name: LL Cool J
@@ -9,15 +10,19 @@ ll_cool_j:
 method_man:
   name: Method Man
   label: def_jam
+  fans: jim, randy, jack, paul
 
 michael_jackson:
   name: Michael Jackson
   label: sony
+  fans: tristan, sam, cameron, jim
 
 snoop_dog:
   name: Snoop Dog
   label: def_jam
+  fans: sam, randy, cameron, tristan
 
 warren_g:
   name: Warren G
   label: def_jam
+  fans: cameron, jack, randy, paul

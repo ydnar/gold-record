@@ -41,20 +41,22 @@ module ActiveRecord
         execute "ALTER TABLE #{table} CHANGE COLUMN #{column} #{column} #{NATIVE_DATABASE_TYPES[:primary_key]} FIRST"
       end
 
-      def change_integer_to_uuid(table, column = :id)
+      def change_integer_to_uuid(table, column = :id, primary_key = :id)
         table = table.to_s
         column = column.to_s
+        after_clause = primary_key ? "AFTER #{primary_key}" : ""
         execute "ALTER TABLE #{table} ADD COLUMN #{column}_new BINARY(16)"
         execute "UPDATE #{table} SET #{column}_new = #{column}"
         execute "ALTER TABLE #{table} DROP COLUMN #{column}"
-        execute "ALTER TABLE #{table} CHANGE COLUMN #{column}_new #{column} BINARY(16) AFTER id"
+        execute "ALTER TABLE #{table} CHANGE COLUMN #{column}_new #{column} BINARY(16) #{after_clause}"
       end
 
-      def change_uuid_to_integer(table, column = :id)
+      def change_uuid_to_integer(table, column = :id, primary_key = :id)
         table = table.to_s
         column = column.to_s
+        after_clause = primary_key ? "AFTER #{primary_key}" : ""
         execute "ALTER TABLE #{table} CHANGE COLUMN #{column} #{column}_old BINARY(16)"
-        execute "ALTER TABLE #{table} ADD COLUMN #{column} int(11) AFTER id"
+        execute "ALTER TABLE #{table} ADD COLUMN #{column} int(11) #{after_clause}"
         execute "UPDATE #{table} SET #{column} = #{column}_old"
         execute "ALTER TABLE #{table} DROP COLUMN #{column}_old"
       end

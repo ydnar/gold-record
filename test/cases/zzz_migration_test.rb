@@ -1,3 +1,4 @@
+# The filename begins with "zzz" to ensure this is the last test.
 require 'cases/helper'
 require 'models/label'
 require 'models/artist'

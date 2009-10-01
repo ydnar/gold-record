@@ -1,12 +1,12 @@
 = GoldRecord
 
 * http://github.com/ydnar/gold-record
-* http://en.wikipedia.org/wiki/Universally_Unique_Identifier
+* http://gemcutter.org/gems/gold-record
 * mailto:randy@shaderlab.com
 
 == DESCRIPTION
 
-GoldRecord is an extension for ActiveRecord that implements unobtrusive binary UUIDs in MySQL.
+GoldRecord is an extension for ActiveRecord that implements unobtrusive binary UUIDs[http://en.wikipedia.org/wiki/Universally_Unique_Identifier] in MySQL.
 
 == FEATURES
 
@@ -84,7 +84,7 @@ GoldRecord supports SchemaDumper by not declaring the <tt>id</tt> column a <tt>P
 
 == INSTALL
 
-=== As a gem (soon):
+=== As a gem:
 
   [sudo] gem install gold-record
 

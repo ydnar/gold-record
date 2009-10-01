@@ -13,6 +13,9 @@ PKG_NAME      = 'gold-record'
 PKG_VERSION   = GoldRecord::VERSION::STRING + PKG_BUILD
 PKG_FILE_NAME = "#{PKG_NAME}-#{PKG_VERSION}"
 
+GEM_SPEC_NAME = File.join(File.dirname(__FILE__), "#{PKG_NAME}-#{PKG_VERSION}.gemspec")
+GEM_NAME      = File.join(File.dirname(__FILE__), "#{PKG_NAME}-#{PKG_VERSION}.gem")
+
 RELEASE_NAME  = "REL #{PKG_VERSION}"
 
 RUBY_FORGE_PROJECT = "gold-record"
@@ -76,7 +79,7 @@ spec = Gem::Specification.new do |s|
   s.name = PKG_NAME
   s.version = PKG_VERSION
   s.summary = "Binary UUID support for ActiveRecord"
-  s.description = "Binary UUID support for ActiveRecord"
+  s.description = "Unobtrusive binary UUID support for ActiveRecord. Supports migrations, reflections, assocations and SchemaDumper."
   s.author = "Randy Reddig"
   s.email = "randy@shaderlab.com"
   s.homepage = "http://github.com/ydnar/gold-record"
@@ -84,7 +87,6 @@ spec = Gem::Specification.new do |s|
   
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
 
-  s.autorequire = "gold_record"
   s.extra_rdoc_files = ["HISTORY.rdoc", "LICENSE.txt", "README.rdoc"]
   s.files = [ "Rakefile", "LICENSE.txt", "README.rdoc", "HISTORY.rdoc" ]
   dist_dirs.each do |dir|
@@ -101,35 +103,36 @@ spec = Gem::Specification.new do |s|
     s.specification_version = 3
 
     if Gem::Version.new(Gem::RubyGemsVersion) >= Gem::Version.new('1.2.0') then
+      s.add_runtime_dependency(%q<activerecord>, [">= 2.3.4"])
       s.add_runtime_dependency(%q<activesupport>, [">= 2.3.4"])
       s.add_runtime_dependency(%q<uuidtools>, [">= 2.0.0"])
     else
+      s.add_dependency(%q<activerecord>, [">= 2.3.4"])
       s.add_dependency(%q<activesupport>, [">= 2.3.4"])
       s.add_dependency(%q<uuidtools>, [">= 2.0.0"])
     end
   else
+    s.add_dependency(%q<activerecord>, [">= 2.3.4"])
     s.add_dependency(%q<activesupport>, [">= 2.3.4"])
     s.add_dependency(%q<uuidtools>, [">= 2.0.0"])
   end
 end
 
-Rake::GemPackageTask.new(spec) do |p|
-  p.gem_spec = spec
-  p.need_tar = true
-  p.need_zip = true
-end
-
-
-# Publishing ------------------------------------------------------
-
-desc "Publish the release files to RubyForge."
-task :release => [ :package ] do
-  require 'rubyforge'
-  require 'rake/contrib/rubyforgepublisher'
-
-  packages = %w( gem tgz zip ).collect{ |ext| "pkg/#{PKG_NAME}-#{PKG_VERSION}.#{ext}" }
-
-  rubyforge = RubyForge.new
-  rubyforge.login
-  rubyforge.add_release(PKG_NAME, PKG_NAME, "REL #{PKG_VERSION}", *packages)
+namespace :gem do
+  desc "Print gemspec"
+  task :spec do
+    open GEM_SPEC_NAME, "wb" do |file|
+      file.write(spec.to_ruby)
+    end
+  end
+  
+  desc "Build gem with Gemcutter"
+  task :build => :spec do
+    system "gem build #{GEM_SPEC_NAME}"
+  end
+  
+  desc "Push gem to Gemcutter"
+  task :push => :build do
+    system "gem push #{GEM_NAME}"
+  end
 end

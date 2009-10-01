@@ -2,7 +2,7 @@
 
 * http://github.com/ydnar/gold-record
 * http://en.wikipedia.org/wiki/Universally_Unique_Identifier
-* mailto:randy@ydnar.com
+* mailto:randy@shaderlab.com
 
 == DESCRIPTION
 
@@ -27,11 +27,12 @@ GoldRecord supports SchemaDumper by not declaring the <tt>id</tt> column a <tt>P
     acts_as_gold_record
   end
   
-=== Or:
+=== Or, for the exceptionally paranoid:
   
   class LargeHadron < ActiveRecord::Base
     acts_as_gold_record
-    validates_uniqueness_of :id, :on => :create
+    set_primary_key :lottery_number
+    validates_uniqueness_of :lottery_number, :on => :create
   end
 
 == MIGRATIONS
@@ -40,20 +41,19 @@ GoldRecord supports SchemaDumper by not declaring the <tt>id</tt> column a <tt>P
     def self.up
       # Change each int(11) id column to binary(16).
       # This preserves the column’s original value as a right-padded 16-byte string.
-      [:users, :blogs, :posts, :comments].each do |table|
+      [:labels, :record_stores].each do |table|
         change_integer_primary_key_to_uuid(table)
         add_index table, :id
       end
 
       # Change association columns to binary(16).
       [
-        [:blogs, :user_id],
-        [:posts, :blog_id],
-        [:posts, :author_id],
-        [:comments, :post_id],
-        [:comments, :author_id],
-      ].each do |table, column|
-        change_integer_to_uuid(table, column)
+        [:artists, :label_id, :id],
+        [:labels_record_stores, :label_id, false],
+        [:labels_record_stores, :record_store_id, false],
+        [:artists_record_stores, :record_store_id, false],
+      ].each do |table, column, primary_key|
+        change_integer_to_uuid(table, column, primary_key)
       end
     end
 
@@ -65,30 +65,29 @@ GoldRecord supports SchemaDumper by not declaring the <tt>id</tt> column a <tt>P
     def self.down
       # Change each binary(16) id column to int(11).
       # MySQL casts the string value to an integer.
-      [:users, :blogs, :posts, :comments].each do |table|
+      [:labels, :record_stores].each do |table|
         remove_index table, :id
         change_uuid_to_integer_primary_key(table)
       end
 
       # Change association columns to int(11).
       [
-        [:blogs, :user_id],
-        [:posts, :blog_id],
-        [:posts, :author_id],
-        [:comments, :post_id],
-        [:comments, :author_id],
+        [:artists, :label_id, :id],
+        [:labels_record_stores, :label_id, false],
+        [:labels_record_stores, :record_store_id, false],
+        [:artists_record_stores, :record_store_id, false],
       ].each do |table, column|
-        change_uuid_to_integer(table, column)
+        change_uuid_to_integer(table, column, primary_key)
       end
     end
   end
 
 == INSTALL
 
-=== As a gem:
+=== As a gem (soon):
 
   [sudo] gem install gold-record
 
 === As a Rails plugin:
 
-Clone/copy to vendor/plugins/gold_record.
+Clone/copy to <tt>vendor/plugins/gold_record</tt>.

@@ -1,6 +1,9 @@
-.DS_Store
+*.gem
+*.gemspec
 *.log
-log/*
 *.pid
-*.tmproj
 *.sqlite3
+*.tmproj
+.DS_Store
+log/*
+pkg/*

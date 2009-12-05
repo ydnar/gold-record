@@ -2,6 +2,7 @@
 *.gemspec
 *.log
 *.pid
+*.rbc
 *.sqlite3
 *.tmproj
 .DS_Store

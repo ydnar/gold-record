@@ -7,13 +7,15 @@ module GoldRecord
     end
 
     def coerce_id(id)
-      if id.blank?
-        nil
-      elsif id.kind_of?(String) && id.size == 16
-        id
-      else
-        UUIDTools::UUID.parse(id).raw rescue GoldRecord.urlsafe_decode64(id) rescue nil
+      if id.kind_of?(String)
+        if id.size == 22
+          id = GoldRecord.urlsafe_decode64(id)
+          id = nil if id.blank?
+        elsif id.size == 36
+          id = UUIDTools::UUID.parse(id).raw rescue nil
+        end
       end
+      id
     end
 
     def find_one_with_uuid(id, options)

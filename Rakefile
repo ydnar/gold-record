@@ -62,7 +62,7 @@ task :rebuild_mysql_databases => 'mysql:rebuild_databases'
 
 Rake::RDocTask.new { |rdoc|
   rdoc.rdoc_dir = 'doc'
-  rdoc.title    = "GoldRecord -- Object-relation mapping put on rails"
+  rdoc.title    = "GoldRecord — Unobtrusive binary UUID support for ActiveRecord"
   rdoc.options << '--line-numbers' << '--inline-source' << '-A cattr_accessor=object'
   rdoc.options << '--charset' << 'utf-8'
   rdoc.template = ENV['template'] ? "#{ENV['template']}.rb" : '../doc/template/horo'
@@ -78,7 +78,7 @@ dist_dirs = [ "lib", "test" ]
 spec = Gem::Specification.new do |s|
   s.name = PKG_NAME
   s.version = PKG_VERSION
-  s.summary = "Binary UUID support for ActiveRecord"
+  s.summary = "Unobtrusive binary UUID support for ActiveRecord"
   s.description = "Unobtrusive binary UUID support for ActiveRecord. Supports migrations, reflections, assocations and SchemaDumper."
   s.author = "Randy Reddig"
   s.email = "randy@shaderlab.com"

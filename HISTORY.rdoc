@@ -1,4 +1,4 @@
-=== Version 0.2.0 (git)
+=== Version 0.2.0 (2009-12-06)
 
 This version replaces ID generation and parsing code from UUIDTools with smaller/faster implementation using pack and SecureRandom directly.
 

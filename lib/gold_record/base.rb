@@ -5,12 +5,14 @@ module GoldRecord
     def gold_record?
       true
     end
-    
+
     def coerce_id(id)
-      if id.is_a?(String) && id.size == 16
+      if id.blank?
+        nil
+      elsif id.kind_of?(String) && id.size == 16
         id
       else
-        UUIDTools::UUID.parse(id).raw rescue nil
+        UUIDTools::UUID.parse(id).raw rescue GoldRecord.urlsafe_decode64(id) rescue nil
       end
     end
 

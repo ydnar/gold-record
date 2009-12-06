@@ -6,8 +6,12 @@ class CoerceIdTest < ActiveRecord::TestCase
     assert_nil Artist.coerce_id(nil)
   end
 
-  def test_coerce_id_with_bogus_data
-    assert_nil Artist.coerce_id("BOGUS")
+  def test_coerce_id_with_false
+    assert_nil Artist.coerce_id(false)
+  end
+
+  def test_coerce_id_with_empty_string
+    assert_nil Artist.coerce_id("")
   end
 
   def test_coerce_id_with_binary_uuid
@@ -15,6 +19,10 @@ class CoerceIdTest < ActiveRecord::TestCase
   end
 
   def test_coerce_id_with_hex_uuid
-    assert_equal NULL_UUID_RAW, Artist.coerce_id(NULL_UUID.to_s)
+    assert_equal NULL_UUID_RAW, Artist.coerce_id(NULL_UUID_HEX)
+  end
+
+  def test_coerce_id_with_base64_uuid
+    assert_equal NULL_UUID_RAW, Artist.coerce_id(NULL_UUID_BASE64)
   end
 end

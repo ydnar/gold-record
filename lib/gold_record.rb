@@ -21,6 +21,7 @@
 # WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 #++
 
+require 'gold_record/util'
 require 'gold_record/base'
 require 'gold_record/fixtures'
 require 'gold_record/connection_adapters/mysql_adapter'

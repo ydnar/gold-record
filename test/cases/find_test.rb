@@ -7,11 +7,21 @@ class FindTest < ActiveRecord::TestCase
   def test_find_with_one_binary_uuid
     artist = Artist.find identify(:michael_jackson)
     assert artist.instance_of?(Artist)
+    assert_equal "Michael Jackson", artist.name
   end
 
   def test_find_with_one_hex_uuid
     artist = Artist.find identify_hex(:michael_jackson)
     assert artist.instance_of?(Artist)
+    assert_equal "Michael Jackson", artist.name
+  end
+
+  def test_find_with_one_base64_uuid
+    assert_equal Artist.coerce_id(identify(:michael_jackson)),
+      Artist.coerce_id(identify_base64(:michael_jackson))
+    artist = Artist.find identify_base64(:michael_jackson)
+    assert artist.instance_of?(Artist)
+    assert_equal "Michael Jackson", artist.name
   end
 
   def test_find_with_multiple_binary_uuids

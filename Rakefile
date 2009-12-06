@@ -118,6 +118,9 @@ spec = Gem::Specification.new do |s|
   end
 end
 
+"Default gem task"
+task :gem => "gem:build"
+
 namespace :gem do
   desc "Print gemspec"
   task :spec do

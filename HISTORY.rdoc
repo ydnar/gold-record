@@ -1,4 +1,17 @@
-=== Version 0.1.0 (git)
+=== Version 0.2.0 (git)
+
+This version replaces ID generation and parsing code from UUIDTools with smaller/faster implementation using +pack+ and +SecureRandom+ directly.
+
+*NOTE:* In this version, +#to_param+ generates hex UUIDs *without* dashes.
+
+* ID parsing is about 36x faster on my machine (see extras/benchmark-uuidtools-vs-pack).
+* Initial support for URL-safe Base64 encoding.
+* Slightly backwards-incompatible change in +#to_param+.
+* +#find+ supports binary, Base64, hex and dash-delimited hex UUID strings as input.
+* Support for varied UUID encodings is implemented in +GoldRecord::UUID.coerce+.
+
+
+=== Version 0.1.0 (2009-10-01)
 
 This is the first preview release of GoldRecord, an extension for ActiveRecord that implements unobtrusive support for binary UUIDs.
 

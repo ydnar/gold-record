@@ -60,4 +60,17 @@ class UrlSafeBase64Test < ActiveRecord::TestCase
       GoldRecord.urlsafe_decode64(12345)
     end
   end
+
+  def test_decode_with_null_string
+    assert_equal "\000" * 16, GoldRecord.urlsafe_decode64("AAAAAAAAAAAAAAAAAAAAAA")
+  end
+
+  def test_decode_with_short_strings
+    assert_equal "", GoldRecord.urlsafe_decode64("A")
+    assert_equal "\000", GoldRecord.urlsafe_decode64("AA")
+    assert_equal "\000\000", GoldRecord.urlsafe_decode64("AAA")
+    assert_equal "\000\000\000", GoldRecord.urlsafe_decode64("AAAA")
+    assert_equal "\000\000\000", GoldRecord.urlsafe_decode64("AAAAA")
+    assert_equal "\000\000\000\000", GoldRecord.urlsafe_decode64("AAAAAA")
+  end
 end

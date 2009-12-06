@@ -8,6 +8,6 @@ module GoldRecord
   end
 
   def self.urlsafe_decode64(str)
-    "#{str.tr("-_", "+/")}===".unpack("m0").first
+    "#{str.tr("-_", "+/")}===".unpack("m").first
   end
 end

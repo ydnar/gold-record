@@ -15,6 +15,6 @@ class ToParamTest < ActiveRecord::TestCase
     artist = Artist.first
     param = artist.to_param
     assert param.instance_of?(String)
-    assert param.match(/\A[0-9a-f\-]{36}\z/)
+    assert param.match(/\A[0-9a-f]{32}\z/)
   end
 end

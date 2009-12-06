@@ -23,7 +23,7 @@ Fixtures.send :include, GoldRecord::Fixtures
 NULL_UUID_RAW = ("\000" * 16).freeze
 NULL_UUID = UUIDTools::UUID.parse_raw(NULL_UUID_RAW).freeze
 NULL_UUID_HEX = "00000000-0000-0000-0000-000000000000".freeze
-NULL_UUID_BASE64 = "AAAAAAAAAAAAAAAAAAAAAA".freeze
+NULL_UUID_BASE64 = ("A" * 22).freeze
 
 # Show backtraces for deprecated behavior for quicker cleanup.
 ActiveSupport::Deprecation.debug = true
@@ -93,6 +93,6 @@ class ActiveSupport::TestCase
     # puts "Label: #{label}"
     # puts "UUID:  #{identify_uuid(label)}"
     # puts "Raw:   #{raw.unpack("H*").first}"
-    GoldRecord.urlsafe_encode64(raw)
+    GoldRecord::UUID.urlsafe_encode64(raw)
   end
 end

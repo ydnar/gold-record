@@ -17,8 +17,8 @@ class FindTest < ActiveRecord::TestCase
   end
 
   def test_find_with_one_base64_uuid
-    assert_equal Artist.coerce_id(identify(:michael_jackson)),
-      Artist.coerce_id(identify_base64(:michael_jackson))
+    assert_equal GoldRecord::UUID.coerce(identify(:michael_jackson)),
+      GoldRecord::UUID.coerce(identify_base64(:michael_jackson))
     artist = Artist.find identify_base64(:michael_jackson)
     assert artist.instance_of?(Artist)
     assert_equal "Michael Jackson", artist.name

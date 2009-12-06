@@ -7,24 +7,12 @@ module GoldRecord
       true
     end
 
-    def coerce_id(id)
-      if id.kind_of?(String)
-        if id.size == 22
-          id = GoldRecord.urlsafe_decode64(id)
-          id = nil if id.blank?
-        elsif id.size == 36
-          id = UUIDTools::UUID.parse(id).raw rescue nil
-        end
-      end
-      id
-    end
-
     def find_one_with_uuid(id, options)
-      find_one_without_uuid(coerce_id(id), options)
+      find_one_without_uuid(GoldRecord::UUID.coerce(id), options)
     end
 
     def find_some_with_uuid(ids, options)
-      ids = ids.map { |id| coerce_id(id) }
+      ids = ids.map { |id| GoldRecord::UUID.coerce(id) }
       ids = ids.uniq # must do this after coercion
       find_some_without_uuid(ids, options)
     end
@@ -36,12 +24,11 @@ module GoldRecord
     end
 
     def to_param_with_uuid
-      uuid = to_uuid
-      uuid ? uuid.to_param : nil
+      id.nil? ? nil : GoldRecord::UUID.encode_hex(id)
     end
 
     def generate_id!
-      self[self.class.primary_key] ||= UUIDTools::UUID.random_create.raw
+      self[self.class.primary_key] ||= GoldRecord::UUID.random_generate
     end
   end
 

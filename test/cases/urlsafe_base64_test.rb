@@ -42,4 +42,22 @@ class UrlSafeBase64Test < ActiveRecord::TestCase
     assert_no_match /\//, encoded
     assert_equal "f39_f39_f39_f39_f39_fw", encoded
   end
+
+  def test_decode_with_nil
+    assert_raise NoMethodError do
+      GoldRecord.urlsafe_decode64(nil)
+    end
+  end
+
+  def test_decode_with_false
+    assert_raise NoMethodError do
+      GoldRecord.urlsafe_decode64(false)
+    end
+  end
+
+  def test_decode_with_number
+    assert_raise NoMethodError do
+      GoldRecord.urlsafe_decode64(12345)
+    end
+  end
 end

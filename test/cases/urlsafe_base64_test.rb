@@ -73,4 +73,19 @@ class UrlSafeBase64Test < ActiveRecord::TestCase
     assert_equal "\000\000\000", GoldRecord.urlsafe_decode64("AAAAA")
     assert_equal "\000\000\000\000", GoldRecord.urlsafe_decode64("AAAAAA")
   end
+  
+  def test_symmetry
+    [
+      "AAAAAAAAAAAAAAAAAAAAAA",
+      "BBBBBBBBBBBBBBBBBBBBBA",
+      "CCCCCCCCCCCCCCCCCCCCCA",
+      "aaaaaaaaaaaaaaaaaaaaaQ",
+      "bbbbbbbbbbbbbbbbbbbbbQ",
+      "cccccccccccccccccccccQ",
+      "---------------------w",
+      "_____________________w",
+    ].each do |value|
+      assert_equal value, GoldRecord.urlsafe_encode64(GoldRecord.urlsafe_decode64(value))
+    end
+  end
 end

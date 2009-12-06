@@ -2,14 +2,13 @@
 
 This version replaces ID generation and parsing code from UUIDTools with smaller/faster implementation using +pack+ and +SecureRandom+ directly.
 
-*NOTE:* In this version, +#to_param+ generates hex UUIDs *without* dashes.
+*NOTE:* +#to_param+ now generates hex UUIDs *without* dashes. This is a slight change in behavior from 0.1.0. Hex-encoded UUIDs with dashes are still supported by +#find+.
 
-* ID parsing is about 36x faster on my machine (see extras/benchmark-uuidtools-vs-pack).
-* Initial support for URL-safe Base64 encoding.
-* Slightly backwards-incompatible change in +#to_param+.
 * +#find+ supports binary, Base64, hex and dash-delimited hex UUID strings as input.
 * Support for varied UUID encodings is implemented in +GoldRecord::UUID.coerce+.
-
+* ID parsing is about 36x faster on my machine (see extras/benchmark-uuidtools-vs-pack).
+* Initial support for URL-safe Base64 encoding.
+* +#to_param+ is no longer patched using +alias_method_chain+. This prevents interfering with models using a specific +#to_param+ implementation.
 
 === Version 0.1.0 (2009-10-01)
 

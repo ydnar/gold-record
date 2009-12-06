@@ -18,9 +18,6 @@ GEM_NAME      = File.join(File.dirname(__FILE__), "#{PKG_NAME}-#{PKG_VERSION}.ge
 
 RELEASE_NAME  = "REL #{PKG_VERSION}"
 
-RUBY_FORGE_PROJECT = "gold-record"
-RUBY_FORGE_USER    = "ydnar"
-
 MYSQL_DB_USER = 'root'
 
 PKG_FILES = FileList[

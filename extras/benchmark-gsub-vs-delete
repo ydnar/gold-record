@@ -1,0 +1,10 @@
+#!/usr/bin/env ruby
+require 'benchmark'
+
+VALUE = "9573b8d4-1ce6-4693-8819-39e3644c33cc"
+
+n = 100000
+Benchmark.bmbm do |x|
+  x.report { n.times { v = VALUE.gsub(/-/, '') } }
+  x.report { n.times { v = VALUE.delete('-') } }
+end

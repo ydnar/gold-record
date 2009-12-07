@@ -44,21 +44,24 @@ GoldRecord supports SchemaDumper by not declaring the <tt>id</tt> column a <tt>P
 == MIGRATIONS
 
   class MakeGoldRecords < ActiveRecord::Migration
+    TABLES = [:labels, :record_stores]
+    ASSOCIATIONS = [
+      [:artists, :label_id, :id],
+      [:labels_record_stores, :label_id, false],
+      [:labels_record_stores, :record_store_id, false],
+      [:artists_record_stores, :record_store_id, false],
+    ]
+
     def self.up
       # Change each int(11) id column to binary(16).
       # This preserves the column’s original value as a right-padded 16-byte string.
-      [:labels, :record_stores].each do |table|
+      TABLES.each do |table|
         change_integer_primary_key_to_uuid(table)
         add_index table, :id
       end
 
       # Change association columns to binary(16).
-      [
-        [:artists, :label_id, :id],
-        [:labels_record_stores, :label_id, false],
-        [:labels_record_stores, :record_store_id, false],
-        [:artists_record_stores, :record_store_id, false],
-      ].each do |table, column, primary_key|
+      ASSOCIATIONS.each do |table, column, primary_key|
         change_integer_to_uuid(table, column, primary_key)
       end
     end
@@ -71,18 +74,13 @@ GoldRecord supports SchemaDumper by not declaring the <tt>id</tt> column a <tt>P
     def self.down
       # Change each binary(16) id column to int(11).
       # MySQL casts the string value to an integer.
-      [:labels, :record_stores].each do |table|
+      TABLES.each do |table|
         remove_index table, :id
         change_uuid_to_integer_primary_key(table)
       end
 
       # Change association columns to int(11).
-      [
-        [:artists, :label_id, :id],
-        [:labels_record_stores, :label_id, false],
-        [:labels_record_stores, :record_store_id, false],
-        [:artists_record_stores, :record_store_id, false],
-      ].each do |table, column|
+      ASSOCIATIONS.each do |table, column|
         change_uuid_to_integer(table, column, primary_key)
       end
     end

@@ -1,5 +1,3 @@
-require 'securerandom'
-
 module GoldRecord
   module UUID
     def self.random_generate

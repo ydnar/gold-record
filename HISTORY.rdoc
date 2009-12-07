@@ -1,3 +1,7 @@
+=== Version 0.2.2 (git)
+
+* Remove explicit securerandom require for Ruby 1.8.6 compatibility.
+
 === Version 0.2.1 (2009-12-06)
 
 * Sets version nibble and reserved bits in generated UUID values (per RFC 4122), leaving 122 bits for random data. This restores behavior present in version 0.1.0.

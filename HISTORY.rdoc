@@ -1,6 +1,6 @@
-=== Version 0.2.1 (git)
+=== Version 0.2.1 (2009-12-06)
 
-* Again sets version nibble and reserved bits in random UUID generation per RFC 4122, leaving 122 bits for random data. This restores behavior present in version 0.1.0.
+* Sets version nibble and reserved bits in generated UUID values (per RFC 4122), leaving 122 bits for random data. This restores behavior present in version 0.1.0.
 
 === Version 0.2.0 (2009-12-06)
 

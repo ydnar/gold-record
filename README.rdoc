@@ -35,6 +35,12 @@ GoldRecord supports SchemaDumper by not declaring the <tt>id</tt> column a <tt>P
     validates_uniqueness_of :lottery_number, :on => :create
   end
 
+== FIXTURES
+
+  # In test/helper.rb or spec_helper.rb:
+  require 'active_record/fixtures'
+  Fixtures.send :include, GoldRecord::Fixtures
+
 == MIGRATIONS
 
   class MakeGoldRecords < ActiveRecord::Migration

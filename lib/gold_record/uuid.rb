@@ -3,7 +3,14 @@ require 'securerandom'
 module GoldRecord
   module UUID
     def self.random_generate
-      SecureRandom.random_bytes(16)
+      bin = SecureRandom.random_bytes(16)
+      # Set version 4
+      bin[6] &= 0b01001111
+      bin[6] |= 0b01000000
+      # Set reserved bits
+      bin[8] &= 0b10111111
+      bin[8] |= 0b10000000
+      bin
     end
   
     def self.coerce(value)

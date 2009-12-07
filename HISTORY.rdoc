@@ -1,3 +1,7 @@
+=== Version 0.2.1 (git)
+
+* Again sets version nibble and reserved bits in random UUID generation per RFC 4122, leaving 122 bits for random data. This restores behavior present in version 0.1.0.
+
 === Version 0.2.0 (2009-12-06)
 
 This version replaces ID generation and parsing code from UUIDTools with smaller/faster implementation using pack and SecureRandom directly.

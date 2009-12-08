@@ -1,4 +1,4 @@
-=== Version 0.2.2 (git)
+=== Version 0.2.2 (2009-12-08)
 
 * Remove explicit securerandom require for Ruby 1.8.6 compatibility.
 

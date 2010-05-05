@@ -5,7 +5,7 @@ module GoldRecord
         class << self
           # Patch Fixtures.identify for binary UUIDs.
           def identify_with_padding(label)
-            ("%-16d" % identify_without_padding(label)).tr(" ", "\0")
+            GoldRecord::UUID.pad_16(identify_without_padding(label))
           end
           alias_method_chain :identify, :padding
         end

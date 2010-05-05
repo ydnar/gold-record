@@ -30,6 +30,10 @@ module GoldRecord
       [str.delete("-")].pack("H*")
     end
 
+    def self.pad_16(int)
+      ("%-16d" % int).tr(" ", "\0")
+    end
+
     # Slightly modified backport from Ruby 1.9
     # http://www.ruby-doc.org/ruby-1.9/classes/Base64.html
     # Strips padding char (=) and newlines from end of encoded string.
